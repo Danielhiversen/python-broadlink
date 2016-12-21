@@ -174,7 +174,6 @@ class device:
 
     aes = AES.new(bytes(self.key), AES.MODE_CBC, bytes(self.iv))
     payload = aes.decrypt(bytes(enc_payload))
-    print(response, "\n", payload)
     if payload:
       self.id = payload[0x00:0x04]
       self.key = payload[0x04:0x14]
