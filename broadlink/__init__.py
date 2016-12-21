@@ -216,6 +216,7 @@ class device:
       checksum += payload[i]
       checksum = checksum & 0xffff
 
+    print(self.key, self.iv)
     aes = AES.new(bytes(self.key), AES.MODE_CBC, bytes(self.iv))
     payload = aes.encrypt(bytes(payload))
 
