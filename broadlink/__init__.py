@@ -381,7 +381,7 @@ class rm(device):
   def send_data(self, data):
     packet = bytearray([0x02, 0x00, 0x00, 0x00])
     packet += data
-    return self.send_packet(0x6a, packet)
+    self.send_packet(0x6a, packet)
 
   def enter_learning(self):
     packet = bytearray(16)
