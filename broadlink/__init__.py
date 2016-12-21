@@ -168,10 +168,8 @@ class device:
     payload[0x35] = ord(' ')
     payload[0x36] = ord('1')
 
-    print("auth1")
     response = self.send_packet(0x65, payload)
-    print("auth2")
-    
+
     enc_payload = response[0x38:]
 
     aes = AES.new(bytes(self.key), AES.MODE_CBC, bytes(self.iv))
