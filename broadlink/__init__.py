@@ -178,7 +178,7 @@ class device:
     payload = aes.decrypt(bytes(enc_payload))
     print(response, "\n", payload)
     if payload:
-      self.ip_arr = payload[0x00:0x04]
+      self.id = payload[0x00:0x04]
       self.key = payload[0x04:0x14]
       return True
     else:
