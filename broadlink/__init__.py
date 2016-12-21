@@ -233,13 +233,18 @@ class device:
     packet[0x20] = checksum & 0xff
     packet[0x21] = checksum >> 8
 
+    starttime = time.time()
     with self.lock:
-      self.cs.sendto(packet, self.host)
-      try:        
-        self.cs.settimeout(self.timeout)
-        response = self.cs.recvfrom(1024)
-      except socket.timeout:
-        return bytearray(0x30)
+      while True:
+        try:
+          self.cs.sendto(packet, self.host)
+          self.cs.settimeout(1)
+          response = self.cs.recvfrom(1024)
+          break
+        except socket.timeout:
+          if (time.time() - starttime) < self.timeout:
+            pass
+          raise
     return bytearray(response[0])
 
 
