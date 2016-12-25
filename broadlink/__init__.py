@@ -345,7 +345,7 @@ class sp2(device):
     response = self.send_packet(0x6a, packet)
     err = response[0x22] | (response[0x23] << 8)
     if err == 0:
-      payload = aes.decrypt(bytes(response[0x38:]))
+      payload = self.aes.decrypt(bytes(response[0x38:]))
       return bool(payload[0x4])
 
 class a1(device):
